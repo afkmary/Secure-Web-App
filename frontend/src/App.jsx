@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import ChuckNorris from "./components/ChuckNorris";
+import './App.css';
 
 function App() {
   const [username, setUsername] = useState("");
@@ -39,7 +40,7 @@ function App() {
   };
 
   if (token) {
-    return <ChuckNorris token={token} />;
+    return <ChuckNorris token={token} setToken={setToken} />;
   }
 
   return (

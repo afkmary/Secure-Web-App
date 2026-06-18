@@ -4,18 +4,20 @@ const ChuckNorris = ({ token, setToken }) => {
   const [fact, setFact] = useState('');
   const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch the fact using the token
   const getFact = async () => {
     setIsLoading(true);
+
     try {
       const response = await fetch('http://localhost:3333/fact', {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      
+
+      {/*BONUS: Loading Spinner */ }
+      await new Promise(resolve => setTimeout(resolve, 1000));
       const data = await response.json();
-      
+
       if (response.ok) {
         setFact(data.fact);
       } else {
@@ -33,43 +35,50 @@ const ChuckNorris = ({ token, setToken }) => {
     getFact();
   }, [token]);
 
-  // BONUS: Logout function
+  {/*BONUS: Logout */ }
   const handleLogout = async () => {
     try {
       await fetch('http://localhost:3333/logout', {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}` 
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
     } catch (error) {
       console.error("Failed to hit logout endpoint:", error);
     } finally {
       if (setToken) {
-        setToken(null); 
+        setToken("");
       }
     }
   };
 
   return (
-    <div className="fact-container dark-mode-vibe">
-      <h2>Chuck Norris Facts 🥋</h2>
-      
-      <div className="fact-display">
-        {/* BONUS: Loading Spinner */}
+    <div className="chuck-page">
+      <button onClick={handleLogout} className="logout-btn">
+        Logout
+      </button>
+
+      <h1 className="chuck-title">
+        🥋 Chuck Norris Facts 🥋
+      </h1>
+
+      <div className="fact-card">
         {isLoading ? (
-          <p className="loading-spinner">Loading fact... ⏳</p>
+          <div className="loading-container">
+            <div className="spinner"></div>
+            <p>Loading fact...</p>
+          </div>
         ) : (
           <p className="fact-text">"{fact}"</p>
         )}
-      </div>
 
-      <div className="button-group">
-        <button onClick={getFact} disabled={isLoading} className="btn-primary">
+        <button
+          onClick={getFact}
+          disabled={isLoading}
+          className="fact-btn"
+        >
           Get Another Fact
-        </button>
-        <button onClick={handleLogout} className="btn-secondary">
-          Logout
         </button>
       </div>
     </div>
