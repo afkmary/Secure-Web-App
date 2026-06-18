@@ -10,7 +10,11 @@ function LoginForm({
 }) {
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={onSubmit}>
+      <form
+        className="login-form"
+        onSubmit={onSubmit}
+        autoComplete="off"
+      >
         <h2>Login</h2>
 
         <div className="form-group">
@@ -20,6 +24,7 @@ function LoginForm({
             value={username}
             onChange={onUsernameChange}
             placeholder="Enter username"
+            autoComplete="off"
             required
           />
         </div>
@@ -31,6 +36,7 @@ function LoginForm({
             value={password}
             onChange={onPasswordChange}
             placeholder="Enter password"
+            autoComplete="new-password"
             required
           />
         </div>
@@ -41,7 +47,7 @@ function LoginForm({
           </p>
         )}
 
-        <button type="submit">
+        <button type="submit" disabled={false}>
           Login
         </button>
       </form>
