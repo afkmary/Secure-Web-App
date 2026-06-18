@@ -28,7 +28,6 @@ function App() {
       const data = await response.json();
 
       if (response.ok && data.uuid) {
-        console.log("Login response:", data);
         setToken(data.uuid);
         setError("");
       } else {
@@ -45,7 +44,6 @@ function App() {
 
   return (
     <div>
-
       <LoginForm
         username={username}
         password={password}

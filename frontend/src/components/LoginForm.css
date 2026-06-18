@@ -14,10 +14,14 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
-.login-form h2 {
+.app-title {
+  color: #7c83fd;
+  font-size: 2rem;
+  font-weight: 700;
   text-align: center;
-  margin-bottom: 25px;
-  color: #4f46e5;
+  margin: 0 0 25px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .form-group {
@@ -27,7 +31,7 @@
 .form-group label {
   display: block;
   margin-bottom: 6px;
-  font-weight: bold;
+  font-weight: 500;
   color: #374151;
 }
 
@@ -65,4 +69,27 @@ button:hover {
   color: #dc2626;
   font-size: 14px;
   text-align: center;
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.eye-button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  color: #6b7280;
+  width: auto;
+  padding: 0;
+}
+
+.eye-button:hover {
+  color: #7c83fd;
 }

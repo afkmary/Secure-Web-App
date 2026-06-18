@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./LoginForm.css";
 
 function LoginForm({
@@ -8,6 +10,9 @@ function LoginForm({
   onSubmit,
   error
 }) {
+
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <div className="login-container">
       <form
@@ -15,7 +20,7 @@ function LoginForm({
         onSubmit={onSubmit}
         autoComplete="off"
       >
-        <h2>Login</h2>
+        <h1 className="app-title">Chuck Norris Facts</h1>
 
         <div className="form-group">
           <label htmlFor="username">Username</label>
@@ -31,14 +36,24 @@ function LoginForm({
 
         <div className="form-group">
           <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={onPasswordChange}
-            placeholder="Enter password"
-            autoComplete="new-password"
-            required
-          />
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={onPasswordChange}
+              placeholder="Enter password"
+              autoComplete="new-password"
+              required
+            />
+
+            <button
+              type="button"
+              className="eye-button"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
         </div>
 
         {error && (
