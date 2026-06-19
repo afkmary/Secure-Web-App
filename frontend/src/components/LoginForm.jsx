@@ -30,7 +30,6 @@ function LoginForm({
             onChange={onUsernameChange}
             placeholder="Enter username"
             autoComplete="off"
-            required
           />
         </div>
 
@@ -43,7 +42,6 @@ function LoginForm({
               onChange={onPasswordChange}
               placeholder="Enter password"
               autoComplete="new-password"
-              required
             />
 
             <button

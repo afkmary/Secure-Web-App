@@ -1,6 +1,8 @@
 import { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import ChuckNorris from "./components/ChuckNorris";
+import { validateLoginForm } from "./utils/validation";
+import { login } from "./services/authService";
 import './App.css';
 
 function App() {
@@ -12,30 +14,19 @@ function App() {
   const handleLogin = async (event) => {
     event.preventDefault();
 
-    if (!username.trim() || !password.trim()) {
-      setError("Username and password are required.");
+    const validationError = validateLoginForm(username, password);
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
-    try {
-      const response = await fetch("http://localhost:3333/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username, password })
-      });
+    const result = await login(username, password);
 
-      const data = await response.json();
-
-      if (response.ok && data.uuid) {
-        setToken(data.uuid);
-        setError("");
-      } else {
-        setError(data.message || "Invalid username or password.");
-      }
-    } catch (error) {
-      setError("Could not connect to the server.");
+    if (result.token) {
+      setToken(result.token);
+      setError("");
+    } else {
+      setError(result.error);
     }
   };
 
